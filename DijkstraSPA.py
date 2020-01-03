@@ -23,47 +23,46 @@ def dijkstra(graph, vertex):
     A = {vertex: 0}
     V = list(graph.keys())
     H = [((float('inf'),'inf'),'inf')]
-    # for i in range(len(graph[vertex])):
-    #     A[graph[vertex][i][1]] = graph[vertex][i][0]
-    print(A)
 
     VminusX = set(V)-set(X)
     H = []
     heap = {}
     for v in V:
         heap[v] = [(float('inf'), (v,v))]
-        print('heap['+v+']:', heap[v])
 
+    ## for all edges (v,w) with w \in X, v \in VminusX
+    # X = X.union({'b'})
+    # VminusX = set(V)-set(X)
+    # for w in X:
+    #     for v in list(set(graph[w].keys()).intersection(VminusX)):
+    #         heap[v].append((graph[w][v], (v,w)))
+    #         print('heap['+v+']:', heap[v])
+    #     # heapq.heapify(heap[v])
+    # print('--------------------------------')
     # for v in VminusX:
-    #     if graph[v] != []:
-    #         heapq.heapify(graph[v])
-    #         heap[v] = [(heapq.heappop(graph[v]),v)]
-    #         H = H + heap[v]
-    #     else:
-    #         heap[v] = [((float('inf'),'inf'),v)]
-    #         H = H + heap[v]
+    #     heapq.heapify(heap[v])
+    #     print('heap['+v+']:', heap[v])
+    #     H.append(heap[v][0])
     # heapq.heapify(H)
-    # print(H)
+    # print(H) # [(2, ('c', 'a')), (4, ('e', 'b')), (2, ('d', 'b'))]
 
-    # for all edges (v,w) with w \in X, v \in VminusX
-    print(X)
-    X = X.union({'b'})
-    VminusX = set(V)-set(X)
-    for w in X:
-        for v in list(set(graph[w].keys()).intersection(VminusX)):
-            heap[v].append((graph[w][v], (v,w)))
+    while X != V:
+        VminusX = set(V)-set(X)
+        for w in X:
+            for v in list(set(graph[w].keys()).intersection(VminusX)):
+                heap[v].append((graph[w][v], (v,w)))
+                print('heap['+v+']:', heap[v])
+        print('--------------------------------')
+        for v in VminusX:
+            heapq.heapify(heap[v])
             print('heap['+v+']:', heap[v])
-        # heapq.heapify(heap[v])
-    print('--------------------------------')
-    for v in VminusX:
-        heapq.heapify(heap[v])
-        print('heap['+v+']:', heap[v])
-        H.append(heap[v][0])
-    heapq.heapify(H)
-    print(H) # [(1, {'b': 'a'}), (2, {'c': 'a'}), (4, {'d': 'a'})]
+            H.append(heap[v][0])
+        heapq.heapify(H)
+        print(H)
 
-    # while X != V:
-    #     VminusX = list(set(V)-set(X))
+        S = heapq.heappop(H)
+        v = S[1][0]
+        w = S[1][1]
 
 
 graph = {

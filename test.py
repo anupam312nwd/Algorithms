@@ -23,14 +23,19 @@ print(graph['a']['d'], list(graph.keys()), list(graph['a'].keys()))
 print('------------------------')
 
 data = [(4, {'b':'a'}), (2, {'c':'a'})]
-data = {4: {'b':'a'}, 2: {'c':'a'}}
+# data = {4: {'b':'a'}, 2: {'c':'a'}}
 # data = [(4, ('b','a')), (2, ('c','a'))]
 # data = [(4, 'a'), (2, 'a')]
-print(data)
-heapq.heapify(list(data))
-print(data)
+heapq.heapify(data)
+print('data: ', data)
+T_n = heapq.heappop(data)
+print(T_n, data)
 # print(heapq.heapify(list(graph['a'])))
 print('------------------------')
-print(set(graph.keys()))
-print(set(graph['a'].keys()))
+# print(set(graph.keys()))
+# print(set(graph['a'].keys()))
+
+S = (2, ('c', 'a'))
+print(type(S), S[1][1])
+# u = 
 
