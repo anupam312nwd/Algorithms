@@ -1,26 +1,21 @@
-<<<<<<< HEAD
 graph = {
-    'A': [('B',2), ('C',4)],
-    'B': [('C',2)],
-    'C': [],
+    'a': [(1,'b'), (2,'c'), (4,'d')],
+    'b': [(2,'d'), (4,'e')],
+    'c': [(3,'d')],
+    'd': [(1,'e')],
+    'e': []
 }
 
-print(graph)
-print('length of graph[\'A\']:=', len(graph['A']))
-print(graph['A'][0][1])
-print(type(graph['A']))
+print(graph['a'])
+print(type(graph['a']))
 
-print('---------------')
-a = [('b',2),('c',3)]
-print(type(a))
-print(a[0][1])
-=======
-def dfs(g):
-    val = 3
-    return dfs_visit(g, val)
+graph = {
+    'a': [{'b':1}, {'c':2}, {'d':4}],
+    'b': [{'d':2}, {'e':4}],
+    'c': [{'d':3}],
+    'd': [{'e':1}],
+    'e': []
+}
+print(graph['a'])
+print(type(graph['a']))
 
-def dfs_visit(g, val):
-    return val + g
-
-print(dfs(4))
->>>>>>> 5a048fa72d7ab51fa03a3787e38602fc147b2dd6
