@@ -9,7 +9,7 @@ Main loop:
     while X \neq V: # [need to grow X by 1 node]
         among all edges (v,w) \in E with w\in X, v\notin X,
         pick the one that minimizes A[v] + l_{vw}
-        # l_{vw} 
+        # l_{vw}
         # Dijkstra's greedy criterion
         [call it (v*, w*)]
         add w* to X
@@ -23,13 +23,17 @@ def dijkstra(graph, vertex):
     A = {vertex: 0}
     V = list(graph.keys())
     H = [((float('inf'),'inf'),'inf')]
-    for i in range(len(graph[vertex])):
-        A[graph[vertex][i][1]] = graph[vertex][i][0]
+    # for i in range(len(graph[vertex])):
+    #     A[graph[vertex][i][1]] = graph[vertex][i][0]
     print(A)
 
-    VminusX = list(set(V)-set(X))
+    VminusX = set(V)-set(X)
     H = []
     heap = {}
+    for v in V:
+        heap[v] = [(float('inf'), (v,v))]
+        print('heap['+v+']:', heap[v])
+
     # for v in VminusX:
     #     if graph[v] != []:
     #         heapq.heapify(graph[v])
@@ -41,23 +45,43 @@ def dijkstra(graph, vertex):
     # heapq.heapify(H)
     # print(H)
 
-    for v in VminusX: # 
-        for w in X:
-            heap[v] = 
+    # for all edges (v,w) with w \in X, v \in VminusX
+    print(X)
+    X = X.union({'b'})
+    VminusX = set(V)-set(X)
+    for w in X:
+        for v in list(set(graph[w].keys()).intersection(VminusX)):
+            heap[v].append((graph[w][v], (v,w)))
+            print('heap['+v+']:', heap[v])
+        # heapq.heapify(heap[v])
+    print('--------------------------------')
+    for v in VminusX:
+        heapq.heapify(heap[v])
+        print('heap['+v+']:', heap[v])
+        H.append(heap[v][0])
+    heapq.heapify(H)
+    print(H) # [(1, {'b': 'a'}), (2, {'c': 'a'}), (4, {'d': 'a'})]
 
     # while X != V:
     #     VminusX = list(set(V)-set(X))
-        
-
 
 
 graph = {
-    'a': [(1,'b'), (2,'c'), (4,'d')],
-    'b': [(2,'d'), (4,'e')],
-    'c': [(3,'d')],
-    'd': [(1,'e')],
-    'e': []
+    'a': {'b':1, 'c':2, 'd':4},
+    'b': {'d':2, 'e':4},
+    'c': {'d':3},
+    'd': {'e':1},
+    'e': {}
 }
+
+
+# graph = {
+#     'a': [(1,'b'), (2,'c'), (4,'d')],
+#     'b': [(2,'d'), (4,'e')],
+#     'c': [(3,'d')],
+#     'd': [(1,'e')],
+#     'e': []
+# }
 
 dijkstra(graph, 'a')
 
