@@ -26,6 +26,7 @@ def BFS(graph, vertex):
     for v in graph:
         path[v] = [v]
         level[v] = float('inf')
+    level[vertex] = 0
     while Queue:
         v = Queue.popleft()
         for w in graph[v]:
@@ -50,8 +51,8 @@ graph = {
 # level, parent, path = BFS(graph, 'A')
 # print(level, '\n', parent, '\n', path)
 # print('-----------------------------------------------')
-# print(BFS(graph, 'C'))
-# print('-----------------------------------------------')
+print(BFS(graph, 'C'))
+print('-----------------------------------------------')
 # print(BFS(graph, 'D'))
 
 graph2 = {
@@ -69,5 +70,5 @@ graph2 = {
 
 }
 
-level, parent, path = BFS(graph2, 'f')
+level, parent, path = BFS(graph2, 's')
 print(level, '\n', path)
