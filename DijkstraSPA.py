@@ -20,59 +20,68 @@ import heapq
 
 def dijkstra(graph, vertex):
     X = {vertex}
-    A = {vertex: 0}
+    dist = {vertex: 0}
     V = list(graph.keys())
     H = [((float('inf'),'inf'),'inf')]
 
     VminusX = set(V)-set(X)
     H = []
     heap = {}
+    path = {} # optional: finding shortest path
     for v in V:
         heap[v] = [(float('inf'), (v,v))]
+        path[v] = [vertex]
 
-    ## for all edges (v,w) with w \in X, v \in VminusX
-    # X = X.union({'b'})
-    # VminusX = set(V)-set(X)
-    # for w in X:
-    #     for v in list(set(graph[w].keys()).intersection(VminusX)):
-    #         heap[v].append((graph[w][v], (v,w)))
-    #         print('heap['+v+']:', heap[v])
-    #     # heapq.heapify(heap[v])
-    # print('--------------------------------')
-    # for v in VminusX:
-    #     heapq.heapify(heap[v])
-    #     print('heap['+v+']:', heap[v])
-    #     H.append(heap[v][0])
-    # heapq.heapify(H)
-    # print(H) # [(2, ('c', 'a')), (4, ('e', 'b')), (2, ('d', 'b'))]
 
-    while X != V:
-        VminusX = set(V)-set(X)
+    while X != set(V):
         for w in X:
             for v in list(set(graph[w].keys()).intersection(VminusX)):
-                heap[v].append((graph[w][v], (v,w)))
-                print('heap['+v+']:', heap[v])
-        print('--------------------------------')
-        for v in VminusX:
-            heapq.heapify(heap[v])
-            print('heap['+v+']:', heap[v])
-            H.append(heap[v][0])
-        heapq.heapify(H)
-        print(H)
+                heapq.heappush(heap[v], (dist[w] + graph[w][v], (v,w)))
 
+        if X == {vertex}:
+            for v in VminusX:
+                heapq.heappush(H, heap[v][0])
+
+        # print(H)
         S = heapq.heappop(H)
         v = S[1][0]
         w = S[1][1]
+        dist[v] = S[0]
+        # print(v,w)
+        # print('v: ', v, 'and w: ', w)
+        X = X.union({v})
+        VminusX = set(V)-set(X)
+        for u in set(graph[v].keys()).intersection(VminusX):
+            for j in range(len(H)):
+                if H[j][1][0] == u:
+                    T = H[j]
+                    H.remove(T)
+                    break
+            if dist[v]+graph[v][u] == min(T[0], dist[v]+graph[v][u]) and T[0] != dist[v]+graph[v][u]:
+                path[u].append(v) # to calculate the path
+            heapq.heappush(H, (min(T[0], dist[v]+graph[v][u]), (u, T[1][1])))
+            # print(H, v, u)
+        # print(H)
+    for v in V:
+        path[v].append(v)       # adding own vertex at the end of the path
+
+    return dist, path
 
 
 graph = {
     'a': {'b':1, 'c':2, 'd':4},
-    'b': {'d':2, 'e':4},
+    'b': {'e':4},
     'c': {'d':3},
-    'd': {'e':1},
+    'd': {'e':1, 'b':2},
     'e': {}
 }
 
+# graph = {
+#     'a': {'b':1, 'c':2, 'd':4},
+#     'b': {'d':2},
+#     'c': {'d':3},
+#     'd': {},
+# }
 
 # graph = {
 #     'a': [(1,'b'), (2,'c'), (4,'d')],
@@ -82,7 +91,8 @@ graph = {
 #     'e': []
 # }
 
-dijkstra(graph, 'a')
+dist, path = dijkstra(graph, 'a')
+print(dist, '\n', path)
 
 '''
 Graph structure:

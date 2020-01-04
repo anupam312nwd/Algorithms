@@ -35,7 +35,20 @@ print('------------------------')
 # print(set(graph.keys()))
 # print(set(graph['a'].keys()))
 
-S = (2, ('c', 'a'))
-print(type(S), S[1][1])
-# u = 
+# S = (2, ('c', 'a'))
+# print(type(S), S[1][1])
+# # u = 
+# V = list(graph.keys())
+# print(V)
 
+H = [(1, ('d', 'b')), (4, ('e', 'b')), (2, ('c', 'a'))]
+print(H[1], type(H))
+# H.remove(H[1])
+for j in range(len(H)):
+    if H[j][1][0] == 'e':
+        T = H[j]
+        H.remove(H[j])
+        break
+    print(j)
+print(H)
+print(T, T[0])
