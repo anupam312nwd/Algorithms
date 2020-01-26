@@ -1,5 +1,4 @@
-## Contains bugs
-## Not working
+""" Codes for Single Linked List data structure """
 
 class Node:
     def __init__(self, data = None):
@@ -22,27 +21,29 @@ class SLinkedList:
         p = self.head
         while p != None:
             if (p.data == k):
-                return p
+                return True
             p = p.next
-        return None
+        return False
 
     def remove(self, k):
         p = self.head
-        if p == k:
-            self.head = None
+        if p.data == k:
+            self.head = p.next
+            return None
         while p.next != None:
-            if (p.next == k):
+            if (p.next.data == k):
                 p.next = p.next.next
-                return p
+                return None
             p = p.next
-        return 'notgood'
+        return None
 
     def __str__(self):
+        """ to define self print output """
         s = ""
         p = self.head
         if p != None:
             while p.next != None:
-                s += p.data
+                s += p.data + "->"
                 p = p.next
             s += p.data
         return s
@@ -53,12 +54,17 @@ l.add('a')
 l.add('b')
 l.add('c')
 l.add('r')
+l.add('a')
 l.add('e')
 l.add('t')
 
 print(l)
-# l.remove(l.search('e'))
-print(l.remove('r'))
+# l.remove(l.search('t'))
+l.remove('t')
 print(l)
-print(l.search('r'))
-print('r'.next)
+l.remove('r')
+print(l)
+l.remove('a')
+print(l)
+print(l.search('c'))
+print(l.search('z'))
