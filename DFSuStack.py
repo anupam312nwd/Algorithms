@@ -1,6 +1,7 @@
 ''' Depth First Search: Topological ordering'''
 from collections import deque
 
+
 def dfs(graph, start_vertex):
     val = len(graph)
     stack = deque([start_vertex])
@@ -9,6 +10,7 @@ def dfs(graph, start_vertex):
     # for w in graph:
     #     top_order[w] = 0
     return dfs_visit(graph, parent, stack,  val, top_order)
+
 
 def dfs_visit(graph, parent, stack,  val, top_order):
 

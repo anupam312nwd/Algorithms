@@ -66,19 +66,22 @@ def dijkstra(graph, vertex):
 
     return dist, path
 
-graph = {
-    'a': {'b':1, 'c':2, 'd':4},
-    'b': {'d':2, 'e':4},
-    'c': {'d':3},
-    'd': {'e':1},
-    'e': {}
-}
+if __name__ == '__main__':
 
-dist, path = dijkstra(graph, 'a')
-print(dist, '\n', path)
 
-'''
-Output:
-{'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4} 
- {'a': ['a', 'a'], 'b': ['a', 'b'], 'c': ['a', 'c'], 'd': ['a', 'b', 'd'], 'e': ['a', 'b', 'd', 'e']}
-'''
+    graph = {
+        'a': {'b':1, 'c':2, 'd':4},
+        'b': {'d':2, 'e':4},
+        'c': {'d':3},
+        'd': {'e':1},
+        'e': {}
+    }
+
+    dist, path = dijkstra(graph, 'a')
+    print(dist, '\n', path)
+
+    '''
+    Output:
+    {'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4} 
+     {'a': ['a', 'a'], 'b': ['a', 'b'], 'c': ['a', 'c'], 'd': ['a', 'b', 'd'], 'e': ['a', 'b', 'd', 'e']}
+    '''

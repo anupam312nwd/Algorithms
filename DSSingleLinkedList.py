@@ -9,8 +9,9 @@ class SLinkedList:
     def __init__(self):
         self.head = None
 
-    def add(self, data):
-        node = Node(data)
+    def add(self, k):
+        """ add """
+        node = Node(k)
         if self.head == None:
             self.head = node
         else:
@@ -68,3 +69,4 @@ l.remove('a')
 print(l)
 print(l.search('c'))
 print(l.search('z'))
+
