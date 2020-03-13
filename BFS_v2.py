@@ -12,15 +12,15 @@ while Q \neq empty:
             add w to Q (at the end)
 """
 
-
 ''' Code working for connected graphs, but has bugs for not connected graphs '''
 from collections import deque
 
+
 def BFS(graph, vertex):
     Queue = deque([vertex])
-#    level = {vertex:0}
-    parent = {vertex:None}
-#    i = 1
+    #    level = {vertex:0}
+    parent = {vertex: None}
+    #    i = 1
     level = {}
     path = {}
     for v in graph:
@@ -30,13 +30,13 @@ def BFS(graph, vertex):
     while Queue:
         v = Queue.popleft()
         for w in graph[v]:
-            if w not in parent: # if w not in level
-#                level[w] = i
+            if w not in parent:  # if w not in level
+                #                level[w] = i
                 parent[w] = v
                 path[w] = path[v] + path[w]
                 level[w] = len(path[w]) - 1
                 Queue.append(w)
-#        i += 1
+    #        i += 1
     return level, parent, path
 
 
@@ -58,17 +58,17 @@ print('-----------------------------------------------')
 # print(BFS(graph, 'D'))
 
 graph2 = {
-    's' : ['a', 'b'],
-    'a' : ['s', 'c'],
-    'b' : ['s', 'c', 'd'],
-    'c' : ['a', 'b', 'd', 'e'],
-    'd' : ['b', 'c', 'e'],
-    'e' : ['c', 'd'],
-    'f' : ['g', 'h'],
-    'g' : ['f', 'i', 'j'],
-    'h' : ['f', 'i'],
-    'i' : ['g', 'h', 'j'],
-    'j' : ['g', 'i']
+    's': ['a', 'b'],
+    'a': ['s', 'c'],
+    'b': ['s', 'c', 'd'],
+    'c': ['a', 'b', 'd', 'e'],
+    'd': ['b', 'c', 'e'],
+    'e': ['c', 'd'],
+    'f': ['g', 'h'],
+    'g': ['f', 'i', 'j'],
+    'h': ['f', 'i'],
+    'i': ['g', 'h', 'j'],
+    'j': ['g', 'i']
 
 }
 
