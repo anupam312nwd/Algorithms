@@ -1,15 +1,18 @@
 ''' Depth First Search: (without using Stack)'''
 
+
 def dfs(graph, vertex):
     parents = {vertex: None}
     dfs_visit(graph, vertex, parents)
     return parents
+
 
 def dfs_visit(graph, vertex, parents):
     for w in graph[vertex]:
         if w not in parents:
             parents[w] = vertex
             dfs_visit(graph, w, parents)
+
 
 graph = {
     'A': ['B', 'C'],

@@ -47,22 +47,24 @@ Between pseudo code and actual code:
 """
 
 import math
+import random
+
 
 def Merge(A, B):  # Merge is working fine
-    l = len(A)
-    m = len(B)
-    n = l+m
+    len_A = len(A)
+    len_B = len(B)
+    n = len_A+len_B
     C = [0]*n
-    i,j = 0,0
+    i, j = 0, 0
     for k in range(0, n):
-        if i < l and j < m:
+        if i < len_A and j < len_B:
             if A[i] <= B[j]:
                 C[k] = A[i]
                 i += 1
             else:
                 C[k] = B[j]
                 j += 1
-        elif i < l:
+        elif i < len_A:
             C[k] = A[i]
             i += 1
         else:
@@ -70,23 +72,26 @@ def Merge(A, B):  # Merge is working fine
             j += 1
     return C
 
+
 def Sort(T):
     m = len(T)
-    if m == 1: return T # Base case
+    if m == 1:
+        return T  # Base case
     t = math.floor(m/2)
     F = Sort(T[0:t])
     G = Sort(T[t:m])
     return Merge(F, G)
 
+
 T = [14, 11, 7, 6, 20, 8, -1, 0, 3, 11]
 print(Sort(T))
 
 
-import random
 L = 1000000
 a = [0]*L
 for i in range(0, L):
     a[i] = random.randint(1, L)
 b = Sort(a)
-#print(a)
-#print(b)
+
+# print(a)
+# print(b)

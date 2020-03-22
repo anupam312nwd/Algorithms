@@ -14,10 +14,11 @@ while Q \neq empty:
 
 from collections import deque
 
+
 def BFS(graph, vertex):
     Queue = deque([vertex])
 #    level = {vertex:0}
-    parent = {vertex:None}
+    parent = {vertex: None}
 #    i = 1
     path = {}
     for v in graph:
@@ -26,8 +27,8 @@ def BFS(graph, vertex):
     while Queue:
         v = Queue.popleft()     # if use _.pop(), then act as stack
         for w in graph[v]:
-            if w not in parent: # if w not in level
-#                level[w] = i
+            if w not in parent:   # if w not in level
+                # level[w] = i
                 parent[w] = v
                 path[w] = path[v] + path[w]
                 Queue.append(w)
@@ -60,11 +61,11 @@ graph2 = {
     # 'c' : ['a', 'b', 'd', 'e'],
     # 'd' : ['b', 'c', 'e'],
     # 'e' : ['c', 'd'],
-    'f' : ['g', 'h'],
-    'g' : ['f', 'i', 'j'],
-    'h' : ['f', 'i'],
-    'i' : ['g', 'h', 'j'],
-    'j' : ['g', 'i']
+    'f': ['g', 'h'],
+    'g': ['f', 'i', 'j'],
+    'h': ['f', 'i'],
+    'i': ['g', 'h', 'j'],
+    'j': ['g', 'i']
 
 }
 
