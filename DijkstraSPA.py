@@ -18,32 +18,33 @@ Main loop:
 '''
 import heapq
 
+
 # adding this line
 def dijkstra(graph, vertex):
     X = {vertex}
     dist = {vertex: 0}
     V = list(graph.keys())
-    H = [((float('inf'),'inf'),'inf')]
+    H = [((float('inf'), 'inf'), 'inf')]
 
     VminusX = set(V)-set(X)
     H = []
     heap = {}
-    path = {} # optional: finding shortest path
+    path = {}                   # optional: finding shortest path
     for v in V:
-        heap[v] = [(float('inf'), (v,v))]
+        heap[v] = [(float('inf'), (v, v))]
         path[v] = [vertex]
-
 
     while X != set(V):
         for w in X:
             for v in list(set(graph[w].keys()).intersection(VminusX)):
-                heapq.heappush(heap[v], (dist[w] + graph[w][v], (v,w)))
+                heapq.heappush(heap[v], (dist[w] + graph[w][v], (v, w)))
 
         if X == {vertex}:
             for v in VminusX:
                 heapq.heappush(H, heap[v][0])
         # print(H)
         S = heapq.heappop(H)
+        # change this part
         v = S[1][0]
         w = S[1][1]
         dist[v] = S[0]
@@ -57,8 +58,9 @@ def dijkstra(graph, vertex):
                     H.remove(T)
                     break
 
-            if dist[v]+graph[v][u] == min(T[0], dist[v]+graph[v][u]) and T[0] != dist[v]+graph[v][u]:
-                path[u].append(v) # to calculate the path
+            if dist[v]+graph[v][u] == min(T[0], dist[v]+graph[v][u]) and \
+               T[0] != dist[v]+graph[v][u]:
+                path[u].append(v)  # to calculate the path
             heapq.heappush(H, (min(T[0], dist[v]+graph[v][u]), (u, T[1][1])))
             # print(H, v, u)
     for v in V:
@@ -66,14 +68,14 @@ def dijkstra(graph, vertex):
 
     return dist, path
 
+
 if __name__ == '__main__':
 
-
     graph = {
-        'a': {'b':1, 'c':2, 'd':4},
-        'b': {'d':2, 'e':4},
-        'c': {'d':3},
-        'd': {'e':1},
+        'a': {'b': 1, 'c': 2, 'd': 4},
+        'b': {'d': 2, 'e': 4},
+        'c': {'d': 3},
+        'd': {'e': 1},
         'e': {}
     }
 
@@ -82,7 +84,8 @@ if __name__ == '__main__':
 
     '''
     Output:
-    {'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4} 
-     {'a': ['a', 'a'], 'b': ['a', 'b'], 'c': ['a', 'c'], 'd': ['a', 'b', 'd'], 'e': ['a', 'b', 'd', 'e']}
+    {'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4}
+     {'a': ['a', 'a'], 'b': ['a', 'b'], 'c': ['a', 'c'], 'd': ['a', 'b', 'd'],\
+    'e': ['a', 'b', 'd', 'e']}
     just added a line here: test.
     '''
