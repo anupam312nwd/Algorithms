@@ -9,6 +9,7 @@ class Node:
 
 
 class SLinkedList:
+
     def __init__(self):
         self.head = None
 
@@ -41,7 +42,7 @@ class SLinkedList:
             p = p.next
         return None
 
-    def __str__(self):
+    def __repr__(self):
         """ to define self print output """
         s = ""
         p = self.head

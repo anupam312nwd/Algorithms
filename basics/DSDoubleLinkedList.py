@@ -31,7 +31,7 @@ class DLinkedList:
 		return None
 
 	def remove(self, p):
-        # p = l.search(p)
+	# p = l.search(p)
 		tmp = p.prev
 		p.prev.next = p.next
 		p.prev = tmp
