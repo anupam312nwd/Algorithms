@@ -1,17 +1,18 @@
-""" to remove duplicates from an unsorted linked list """
+""" to remove duplicates from an unsorted linked list
+in this code: creating a new LinkedList and changing that while keeping the old one """
 
 # first write linkedlist class and node class
 # use set to keep track of unique elements in the linkedlist
 # use .remove() to remove elements from linkedlist
 
-class Node:
+class Node():
 
     def __init__(self, data=None):
         self.data = data
         self.next = None
 
 
-class SLinkedList:
+class SLinkedList():
 
     def __init__(self, head=None):
         self.head = None
@@ -38,40 +39,36 @@ class SLinkedList:
         return s
 
 
-def remove_dups(llist):
+def remove_dups(linklist):
 
     list_set = set()               # starting with empty set
-    pointer = llist.head
+    llist = SLinkedList()
+    pointer = linklist.head
 
     while pointer is not None:
-        # print(list_set)
         if pointer.data in list_set:
-            # if pointer.next is not None:
-            pointer.data = pointer.next.data
-            pointer.next = pointer.next.next
-            # else:
-            #     pointer.data = None
-            #     pointer.next = None
+            pointer = pointer.next
         else:
+            llist.add(pointer.data)
             list_set.add(pointer.data)
             pointer = pointer.next
-        print(llist)
-        print(pointer.data)
-    return llist
+            print(llist)
 
 
 link = SLinkedList()
 
+link.add('r')
+link.add('a')
 link.add('a')
 link.add('b')
-link.add('c')
-link.add('d')
-link.add('c')
-link.add('a')
-link.add('c')
+link.add('b')
 link.add('a')
 link.add('b')
+link.add('b')
+link.add('b')
+link.add('b')
+link.add('c')
 link.add('t')
+link.add('c')
 
-print(link)
 print(remove_dups(link))

@@ -1,0 +1,7 @@
+#+TITLE: Ch2: LinkedList
+
+* Notes
+* Questions
+** 2.1 remove duplicates
+- two ways to solve the problem
+  - create a new SLinkedList with only
