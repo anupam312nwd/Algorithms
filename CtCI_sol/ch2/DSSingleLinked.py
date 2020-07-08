@@ -35,7 +35,7 @@ class SLinkedList:
 
     def appendToTail(self, k):
         """ add data k at the end of the List """
-        pointer = self.head
+        pointer = self.head     # both pointer and self.head have same memory location
         if pointer is None:
             self.head = Node(k)
         else:
@@ -57,6 +57,7 @@ class SLinkedList:
                 if pointer.next.data == k:
                     pointer.next = pointer.next.next
                     return None
+                pointer = pointer.next
             return None
 
     def __repr__(self):
@@ -77,3 +78,11 @@ link.add('b')
 link.add('c')
 
 print(link)
+link.add('d')
+print(link)
+print(link.search('b'))
+link.remove('b')
+print('--------------------------------------------------')
+print(link)
+
+print('-------------------------------------------------- ')
