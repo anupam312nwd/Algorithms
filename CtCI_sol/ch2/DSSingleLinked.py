@@ -14,14 +14,24 @@ class SLinkedList:
     def __init__(self, head=None):
         self.head = None
 
-    def add(self, k):
+    # def add(self, k):
+    #     """ add a node in the beginning """
+    #     node = Node(k)
+    #     if self.head is None:
+    #         self.head = node
+    #     else:
+    #         node.next = self.head
+    #         self.head = node
+
+    def add_nodes(self, *args):
         """ add a node in the beginning """
-        node = Node(k)
-        if self.head is None:
-            self.head = node
-        else:
-            node.next = self.head
-            self.head = node
+        for k in args:
+            node = Node(k)
+            if self.head is None:
+                self.head = node
+            else:
+                node.next = self.head
+                self.head = node
 
     def search(self, k):
         """ return True if exist in LinkedList else False """
@@ -71,18 +81,20 @@ class SLinkedList:
         s += pointer.data
         return s
 
-link = SLinkedList()
+# link = SLinkedList()
+# link.add('a')
+# link.add('b')
+# link.add('c')
 
-link.add('a')
-link.add('b')
-link.add('c')
-
-print(link)
-link.add('d')
-print(link)
-print(link.search('b'))
-link.remove('b')
-print('--------------------------------------------------')
-print(link)
+# print(link)
+# link.add('d')
+# print(link)
+# print(link.search('b'))
+# link.remove('b')
+# print('--------------------------------------------------')
+# print(link)
 
 print('-------------------------------------------------- ')
+link1 = SLinkedList()
+link1.add_nodes('a', 't', 'l', 'm', '[', '=', 'r')
+print(link1)
