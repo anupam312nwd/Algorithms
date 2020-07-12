@@ -38,6 +38,7 @@ def BFS(graph, vertex):
                 Queue.append(w)
     #        i += 1
     return level, parent, path
+# it's not giving the shortest path, but just any path
 
 
 graph = {
