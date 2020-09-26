@@ -1,14 +1,10 @@
-import numpy as np
-
-a = np.random.rand(2, 3)
-b = np.random.randn(2, 3)
-k = np.random.randint(0, 9, (4, 5))
-
-c = {"name": "AK", "class": "PhD", "major": "maths"}
-for t in c:
-    print(t, c[t])
+def add_pet_to_list(pet, pets=[]):
+    pets.append(pet)
+    return pets
 
 
-print(a)
-print(b)
-print(k)
+list_w_cat = add_pet_to_list("cat1")
+list_w_dog = add_pet_to_list("dog1")
+
+print(list_w_cat)
+print(list_w_dog)

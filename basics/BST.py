@@ -38,7 +38,7 @@ def bst_search(data, root, parent=None, child=None):
     elif data == root.data:
         return True, root, parent, child
     elif data < root.data:
-            return bst_search(data, root.left, root, False)
+        return bst_search(data, root.left, root, False)
     else:
         return bst_search(data, root.right, root, True)
 
@@ -47,7 +47,7 @@ def bst_delete(data, root):
     """ 3 cases:
     if data is at a leaf node, has one child, has two child
     - first we need to search the data and corresponding node
-    """
+    """    
     val, node, parent, child = bst_search(data, root)
     if not val:
         return None
@@ -99,6 +99,11 @@ def bst_traverse(root, traverse=None, check_tree=None):
     bst_traverse(root.right, traverse, check_tree)
     return traverse, check_tree
 
+
+def bst_in_order_traverse(root, traverse=None):
+    pass
+
+
 def bst_min(root, parent=None):
     if root.left is None:
         return root.data, parent
@@ -113,48 +118,38 @@ def bst_max(root):
         return bst_min(root.right)
 
 
-# root = Node(7)
-# root = bst_insert(7)
-# bst_insert(8, root)
-# bst_insert(4, root)
-# bst_insert(2, root)
-# bst_insert(9, root)
-# bst_insert(6, root)
-
-# print(root.left.data)
-# print(root.right.data)
-# print(root.left.right.data)
+if __name__ == '__main__':
 
 
-root = bst_insert(12)
-bst_insert(5, root)
-bst_insert(14, root)
-bst_insert(3, root)
-bst_insert(7, root)
-bst_insert(13, root)
-bst_insert(17, root)
-bst_insert(16, root)
-bst_insert(20, root)
-bst_insert(15, root)
-bst_insert(18, root)
-bst_insert(1, root)
-bst_insert(6, root)
-bst_insert(11, root)
+    root = bst_insert(12)
+    bst_insert(5, root)
+    bst_insert(14, root)
+    bst_insert(3, root)
+    bst_insert(7, root)
+    bst_insert(13, root)
+    bst_insert(17, root)
+    bst_insert(16, root)
+    bst_insert(20, root)
+    bst_insert(15, root)
+    bst_insert(18, root)
+    bst_insert(1, root)
+    bst_insert(6, root)
+    bst_insert(11, root)
 
-traverse, check_tree = bst_traverse(root, set(), [])
-print(traverse)
-print(check_tree)
+    traverse, check_tree = bst_traverse(root, set(), [])
+    print(traverse)
+    print(check_tree)
 
-print('-------------------------------------------------- ')
-val, parent = bst_min(root.right)
-print(val)
-print(parent)
-bst_delete(14, root)
-traverse, check_tree = bst_traverse(root, set(), [])
-print(traverse)
-print(check_tree)
-print('-------------------------------------------------- ')
-bst_delete(7, root)
-traverse, check_tree = bst_traverse(root, set(), [])
-print(traverse)
-print(check_tree)
+    print('-------------------------------------------------- ')
+    val, parent = bst_min(root.right)
+    print(val)
+    print(parent)
+    bst_delete(14, root)
+    traverse, check_tree = bst_traverse(root, set(), [])
+    print(traverse)
+    print(check_tree)
+    print('-------------------------------------------------- ')
+    bst_delete(7, root)
+    traverse, check_tree = bst_traverse(root, set(), [])
+    print(traverse)
+    print(check_tree)

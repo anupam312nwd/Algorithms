@@ -1,63 +1,26 @@
-# code taken from here: https://gist.github.com/ptigas/2820165
-# testing the change
-# some more changes
+import math
 
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        self.prev = None
+max_num = math.pow(2, 31)
+print(max_num - 1 < 1534236469)
 
-
-class LinkedList:
-    def __init__(self):
-        self.head = None
-
-    def insert(self, data):
-        node = Node(data)
-        if self.head = None:
-            self.head = node
-        else:
-            node.next = self.head
-            node.next.prev = node
-            self.head = node
-
-    def search(self, k):
-        p = self.head
-        if p is not None:
-            while p.next is not None:
-                if p.data == k:
-                    return p
-                p = p.next
-            if p.data == k:
-                return p
-        return None
-
-    def remove(self, p):
-        # p = l.search(p)
-        tmp = p.prev
-        p.prev.next = p.next
-        p.prev = tmp
-
-    def __str__(self):
-        s = ""
-        p = self.head
-        if p != None:
-            while p.next is not None:
-                s += p.data
-                p = p.next
-            s += p.data
-        return s
+a = "anup kumar"
+print(a[::-1])
+print("".join(reversed(a)))
+print(str(725))
+a = [7, 2, 3, 1]
+b = ["Anup", "rahul", "sumit"]
 
 
-# example code
-l = LinkedList()
+def reverseBits(n: int) -> int:
+    int_to_str = str(n)
+    rev_int = "".join(reversed(int_to_str))
+    return int(rev_int)
 
-l.insert('a')
-l.insert('b')
-l.insert('c')
 
-print(l)
-l.remove(l.search('b'))
-# l.remove('b')
-print(l)
+print(reverseBits(91127))
+print(reverseBits(720407136))
+
+n = 3
+bin_n = bin(n)[2:].rjust(4, "0")
+print(bin_n)
+print(pow(2, 4))
