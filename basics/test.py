@@ -1,26 +1,35 @@
-import math
+import heapq
+import scipy
 
-max_num = math.pow(2, 31)
-print(max_num - 1 < 1534236469)
+print(scipy.__version__)
+heap = [(float("inf"), "a")]
+heapq.heappush(heap, (7, "b"))
+heapq.heappush(heap, (5, "c"))
+heapq.heappush(heap, (8, "d"))
+heapq.heappush(heap, (3, "e"))
 
-a = "anup kumar"
-print(a[::-1])
-print("".join(reversed(a)))
-print(str(725))
-a = [7, 2, 3, 1]
-b = ["Anup", "rahul", "sumit"]
+print(heap)
+
+hp = []
+# a = heapq.heappop(heap)
+i, j = heapq.heappop(heap)
+print("--------------------------------------------------")
+print(i, j)
+
+hp.append(heapq.heappop(heap))
+print("--------------------------------------------------")
+print(hp)
+print(heap)
+print("--------------------------------------------------")
+print(type(heap))
 
 
-def reverseBits(n: int) -> int:
-    int_to_str = str(n)
-    rev_int = "".join(reversed(int_to_str))
-    return int(rev_int)
+lsta = [(1, "e"), (4, "b"), (2, "a"), (7, "d")]
+lstb = [(1, "e"), (4, "b"), (2, "a"), (5, "d")]
 
+heapq.heapify(lsta)
+heapq._heapify_max(lstb)
 
-print(reverseBits(91127))
-print(reverseBits(720407136))
-
-n = 3
-bin_n = bin(n)[2:].rjust(4, "0")
-print(bin_n)
-print(pow(2, 4))
+print("--------------------------------------------------")
+print(lsta)
+print(lstb)

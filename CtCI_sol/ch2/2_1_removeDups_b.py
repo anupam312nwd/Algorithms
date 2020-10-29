@@ -4,15 +4,14 @@
 # use set to keep track of unique elements in the linkedlist
 # use .remove() to remove elements from linkedlist
 
-class Node:
 
+class Node:
     def __init__(self, data=None):
         self.data = data
         self.next = None
 
 
 class SLinkedList:
-
     def __init__(self, head=None):
         self.head = None
 
@@ -30,7 +29,8 @@ class SLinkedList:
     def __repr__(self):
         s = ""
         pointer = self.head
-        if pointer is None: return s
+        if pointer is None:
+            return s
         while pointer.next is not None:
             s += pointer.data + "->"
             pointer = pointer.next
@@ -40,7 +40,7 @@ class SLinkedList:
 
 def remove_dups(linklist):
 
-    list_set = set()               # starting with empty set
+    list_set = set()  # starting with empty set
     # llist = SLinkedList()
     pointer = linklist.head
     list_set.add(pointer.data)
@@ -61,21 +61,23 @@ def remove_dups(linklist):
             pointer = pointer.next
     return linklist
 
+
 link = SLinkedList()
 
-link.add('r')
-link.add('r')
-link.add('a')
-link.add('a')
-link.add('b')
-link.add('b')
-link.add('a')
-link.add('b')
-link.add('b')
-link.add('b')
-link.add('b')
-link.add('c')
-link.add('t')
+
+link.add("r")
+link.add("r")
+link.add("a")
+link.add("a")
+link.add("b")
+link.add("b")
+link.add("a")
+link.add("b")
+link.add("b")
+link.add("b")
+link.add("b")
+link.add("c")
+link.add("t")
 
 # link.add('c')
 # link.add('d')
@@ -86,5 +88,5 @@ link.add('t')
 # link.add('b')
 # link.add('t')
 
-print('-------------------------------------------------- ')
-print('final list', remove_dups(link))
+print("-------------------------------------------------- ")
+print("final list", remove_dups(link))

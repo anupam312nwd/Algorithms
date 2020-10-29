@@ -3,7 +3,7 @@
 import sys
 import heapq
 
-f = open("case3.txt", "r")
+f = open("case4.txt", "r")
 data = f.read()
 
 # data = sys.stdin.read()
@@ -19,11 +19,11 @@ for num, line in enumerate(data.split("\n")):
             x, y, t1, t2 = int(x), int(y), int(t1), int(t2)
             if x in graph.keys():
                 if y in graph[x].keys():
-                    graph[x][y].append((t1, t2))
+                    graph[x][y].append((t2, t1))
                 else:
-                    graph[x][y] = [(t1, t2)]
+                    graph[x][y] = [(t2, t1)]
             else:
-                graph[x] = {y: [(t1, t2)]}
+                graph[x] = {y: [(t2, t1)]}
 
 # print(graph)
 
@@ -51,7 +51,7 @@ def escape_from_time(graph, N, T):
     while not_visited and heap:
         time_tup, ver_tup = heapq.heappop(heap)
         if time_dict[ver_tup[0]] > time_tup[0] and (
-            0 < time_tup[1] - time_dict[ver_tup[1]] <= T
+            0 <= time_tup[1] - time_dict[ver_tup[1]] <= T
         ):
             time_dict[ver_tup[0]] = time_tup[0]
             visited.add(ver_tup[0])
@@ -61,15 +61,15 @@ def escape_from_time(graph, N, T):
 
         for nbr in graph[ver_tup[0]]:
             graph[ver_tup[0]][nbr].sort()
-            for start_t, stop_t in graph[ver_tup[0]][nbr]:
-                previous_stop_t = time_dict[ver_tup[0]]
-                if previous_stop_t + T >= start_t > previous_stop_t:
+            for stop_t, start_t in graph[ver_tup[0]][nbr]:
+                previous_stop_t = time_tup[0]
+                if previous_stop_t + T >= start_t >= previous_stop_t:
                     break
             # if nbr in not_visited and time_dict[nbr] > stop_t:
             if (
                 nbr in not_visited
                 and time_dict[nbr] > stop_t
-                and 0 < start_t - time_dict[ver_tup[0]] <= T
+                and 0 <= start_t - previous_stop_t <= T
             ):
                 time_dict[nbr] = stop_t
                 heapq.heappush(heap, ((stop_t, start_t), (nbr, ver_tup[0])))
