@@ -1,4 +1,4 @@
-''' Depth First Search: Topological ordering'''
+""" Depth First Search: Topological ordering"""
 from collections import deque
 
 
@@ -9,10 +9,10 @@ def dfs(graph, start_vertex):
     top_order = {}
     # for w in graph:
     #     top_order[w] = 0
-    return dfs_visit(graph, parent, stack,  val, top_order)
+    return dfs_visit(graph, parent, stack, val, top_order)
 
 
-def dfs_visit(graph, parent, stack,  val, top_order):
+def dfs_visit(graph, parent, stack, val, top_order):
 
     while stack:
         v = stack[-1]
@@ -21,37 +21,32 @@ def dfs_visit(graph, parent, stack,  val, top_order):
                 if w not in parent:
                     parent[w] = v
                     stack.append(w)
-                    dfs_visit(graph, parent, stack,  val, top_order)
-        if stack == deque([]): break
-        #print(stack, top_order)
+                    dfs_visit(graph, parent, stack, val, top_order)
+        if stack == deque([]):
+            break
+        # print(stack, top_order)
         u = stack.pop()
         top_order[u] = val
         val -= 1
 
     return parent, top_order
 
-graph = {
-    'A': ['B', 'C'],
-    'B': ['D', 'E'],
-    'C': ['D'],
-    'D': [],
-    'E': ['D']
-}
-print(dfs(graph, 'A'))
+
+graph = {"A": ["B", "C"], "B": ["D", "E"], "C": ["D"], "D": [], "E": ["D"]}
+print(dfs(graph, "A"))
 
 graph2 = {
-    'a':['b','c'],
-    'b':['d','f','g'],
-    'c':['d'],
-    'd':['e'],
-    'e':['g'],
-    'f':['h'],
-    'g':['f','h'],
-    'h':[]
+    "a": ["b", "c"],
+    "b": ["d", "f", "g"],
+    "c": ["d"],
+    "d": ["e"],
+    "e": ["g"],
+    "f": ["h"],
+    "g": ["f", "h"],
+    "h": [],
 }
 
-print(dfs(graph2, 'a'))
-
+print(dfs(graph2, "a"))
 
 
 # def dfs(graph, start_vertex):
@@ -75,5 +70,3 @@ print(dfs(graph2, 'a'))
 #             top_order[u] = val
 #             val -= 1
 #     return parent, top_order
-
-

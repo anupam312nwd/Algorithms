@@ -3,18 +3,18 @@
 # import argparse
 
 
-def binary_search(val, arr, sind, eind):
-    if sind > eind:
+def binary_search(val, arr, left, right):
+    if left > right:
         return -1
 
-    mind = int((sind + eind) / 2)
+    mid = int((left + right) / 2)
 
-    if arr[mind] == val:
-        return mind
-    elif arr[mind] < val:
-        return binary_search(val, arr, mind + 1, eind)
+    if arr[mid] == val:
+        return mid
+    elif arr[mid] < val:
+        return binary_search(val, arr, mid + 1, right)
     else:
-        return binary_search(val, arr, sind, mind - 1)
+        return binary_search(val, arr, left, mid - 1)
 
 
 if __name__ == "__main__":
@@ -27,6 +27,6 @@ if __name__ == "__main__":
 
     arr = [1, 2]
     val = 2
-    sind = 0
-    eind = len(arr) - 1
-    print(binary_search(val, arr, sind, eind))
+    left = 0
+    right = len(arr) - 1
+    print(binary_search(val, arr, left, right))

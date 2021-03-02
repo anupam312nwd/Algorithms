@@ -3,10 +3,10 @@
 
 import sys
 
-f = open("case2.txt", "r")
-data = f.read()
+# f = open("case2.txt", "r")
+# data = f.read()
 
-# data = sys.stdin.read()
+data = sys.stdin.read()
 
 mat_lst = []
 for num, line in enumerate(data.split("\n")):
@@ -39,17 +39,23 @@ def gen_zero_one_lst(n):
 
             tmp_lst.append(ele)
 
-            if (len(tmp_ele) == 1) and (tmp_ele[-1] == 0):
-                tmp_ele.append(0)
-                tmp_lst.append(tmp_ele)
-            if (len(tmp_ele) >= 2) and (tmp_ele[-1] == 0) and (tmp_ele[-2] == 1):
+            if tmp_ele[-1] == 0:
                 tmp_ele.append(0)
                 tmp_lst.append(tmp_ele)
 
         m += 1
         lst = tmp_lst
 
-    return lst
+    tmp_lst = []
+    if n in {2, 3}:
+        k = 1
+    elif n in {4, 5, 6}:
+        k = 1
+    for ele in lst:
+        if sum(ele) >= k:
+            tmp_lst.append(ele)
+
+    return tmp_lst
 
 
 def gen_zero_one_dict(n):

@@ -2,8 +2,8 @@
 bst
 """
 
-class Node():
 
+class Node:
     def __init__(self, data=None):
 
         self.data = data
@@ -29,7 +29,7 @@ def bst_insert(data, root=None):
 
 
 def bst_search(data, root, parent=None, child=None):
-    """ return boolean, root, parent, child
+    """return boolean, root, parent, child
     return T/F (if found), root (node of data), parent (parent of node),
     child (0/1 whether it's left/right child of parent)
     """
@@ -44,10 +44,10 @@ def bst_search(data, root, parent=None, child=None):
 
 
 def bst_delete(data, root):
-    """ 3 cases:
+    """3 cases:
     if data is at a leaf node, has one child, has two child
     - first we need to search the data and corresponding node
-    """    
+    """
     val, node, parent, child = bst_search(data, root)
     if not val:
         return None
@@ -86,7 +86,8 @@ def bst_delete(data, root):
 
 
 def bst_traverse(root, traverse=None, check_tree=None):
-    if root is None: return
+    if root is None:
+        return
     left_data = None
     right_data = None
     if root.left is not None:
@@ -118,8 +119,7 @@ def bst_max(root):
         return bst_min(root.right)
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
 
     root = bst_insert(12)
     bst_insert(5, root)
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     print(traverse)
     print(check_tree)
 
-    print('-------------------------------------------------- ')
+    print("-------------------------------------------------- ")
     val, parent = bst_min(root.right)
     print(val)
     print(parent)
@@ -148,7 +148,7 @@ if __name__ == '__main__':
     traverse, check_tree = bst_traverse(root, set(), [])
     print(traverse)
     print(check_tree)
-    print('-------------------------------------------------- ')
+    print("-------------------------------------------------- ")
     bst_delete(7, root)
     traverse, check_tree = bst_traverse(root, set(), [])
     print(traverse)
