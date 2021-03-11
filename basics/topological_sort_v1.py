@@ -1,17 +1,9 @@
 #!/usr/bin/env python
-# contains error, not detecting cycle in graph
+# return topological sort if graph contains no cycle
+# it does not detect cycle in graph
 
 from collections import defaultdict
 from collections import deque
-
-graph = defaultdict(lambda: [])
-graph["c"] = ["a", "b"]
-graph["a"] = ["d"]
-graph["b"] = ["d"]
-graph["d"] = ["g"]
-graph["e"] = ["a", "d", "f"]
-graph["g"] = ["h"]
-graph["f"] = ["h"]
 
 
 def _dfs(node, visited, graph, top_order):
@@ -42,5 +34,15 @@ def top_sort(graph):
     return top_order
 
 
-top_sort_ord = top_sort(graph)
-print(top_sort_ord)
+if __name__ == "__main__":
+    graph = defaultdict(lambda: [])
+    graph["c"] = ["a", "b"]
+    graph["a"] = ["d"]
+    graph["b"] = ["d"]
+    graph["d"] = ["g"]
+    graph["e"] = ["a", "d", "f"]
+    graph["g"] = ["h"]
+    graph["f"] = ["h"]
+
+    top_sort_ord = top_sort(graph)
+    print(top_sort_ord)
