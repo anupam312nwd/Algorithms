@@ -7,6 +7,7 @@
 
 from collections import deque
 
+
 def bfs_traversal(graph, node):
     visited = {node}
     que = deque(node)
@@ -33,6 +34,7 @@ def short_path_len(graph, paths):
         short_path_len[v] = len(paths[v]) - 1
     return short_path_len
 
+
 def parents(graph, paths):
     parents = {}
     for v in graph:
@@ -44,18 +46,18 @@ def parents(graph, paths):
 
 
 graph = {
-    'a': ['b', 'd', 'c'],
-    'b': ['a', 'd', 'e'],
-    'c': ['a', 'i'],
-    'd': ['a', 'b', 'h'],
-    'e': ['b', 'f'],
-    'f': ['e'],
-    'h': ['d', 'i'],
-    'i': ['h', 'k'],
-    'k': ['i']
+    "a": ["b", "d", "c"],
+    "b": ["a", "d", "e"],
+    "c": ["a", "i"],
+    "d": ["a", "b", "h"],
+    "e": ["b", "f"],
+    "f": ["e"],
+    "h": ["d", "i"],
+    "i": ["h", "k"],
+    "k": ["i"],
 }
 
-traverse, paths = bfs_traversal(graph, 'a')
+traverse, paths = bfs_traversal(graph, "a")
 print(traverse)
 print(paths)
 print(short_path_len(graph, paths))

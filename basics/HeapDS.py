@@ -1,5 +1,6 @@
-''' Working with Heap data structure '''
+""" Working with Heap data structure """
 import heapq
+
 # H = [21,1,45,78,3,5, float('inf')]
 # # Covert to a heap
 # heapq.heapify(H)
@@ -24,28 +25,36 @@ import heapq
 # heapq.heapify(F)
 # print(F)
 # print('------------------------')
+
 graph = {
-    'a': [(1,'b'), (2,'c'), (4,'d')],
-    'b': [(2,'d'), (4,'e')],
-    'c': [(3,'d')],
-    'd': [(1,'e')],
-    'e': []
+    "a": [(1, "b"), (2, "c"), (4, "d")],
+    "b": [(2, "d"), (4, "e")],
+    "c": [(3, "d")],
+    "d": [(1, "e")],
+    "e": [],
 }
-print(graph['a'], len(graph['a']), graph['a'][1][1])
-print('------------------------')
-heapq.heapify(graph['a'])
-print(graph['a'])
+
+lst = graph["a"]
+print(lst)
+heapq._heapify_max(lst)
+print("--------------------------------------------------")
+print(lst)
+
+print(graph["a"], len(graph["a"]), graph["a"][1][1])
+print("------------------------")
+heapq.heapify(graph["a"])
+print(graph["a"])
 for v in graph:
     heapq.heapify(graph[v])
     # print('-->', graph[v])
-print('------------------------')
+print("------------------------")
 heap = {}
 # H = [(float('inf'))]
 
-H = [((float('inf'),'inf'),'inf')]
+H = [((float("inf"), "inf"), "inf")]
 for v in graph:
     if graph[v] != []:
-        heap[v] = [(heapq.heappop(graph[v]),v)]
+        heap[v] = [(heapq.heappop(graph[v]), v)]
         # print(type(heap[v]),heap[v])
         H = H + heap[v]
 
@@ -53,10 +62,10 @@ for v in graph:
 # print('------------------------')
 print(H)
 heapq.heapify(H)
-print('------------------------')
-print('H :',H)
+print("------------------------")
+print("H :", H)
 print(H[0][0][0], H[0][0][1], H[0][1])
-print('------------------------')
+print("------------------------")
 print(graph.items())
 print(graph.keys())
 print(list(graph.keys()))
@@ -64,11 +73,11 @@ print(type(graph.keys()))
 
 V = list(graph.keys())
 print(V)
-X = ['a', 'c', 'e']
-print(list(set(V)-set(X)))
+X = ["a", "c", "e"]
+print(list(set(V) - set(X)))
 print(type(X))
-print('------------------------')
-print(graph['a'])
-print(len(graph['a']))
+print("------------------------")
+print(graph["a"])
+print(len(graph["a"]))
 # print(heap['a'])
 # print(graph['a'][0][0],graph['a'][0][1])

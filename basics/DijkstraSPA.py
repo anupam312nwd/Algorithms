@@ -24,7 +24,7 @@ def dijkstra(graph, vertex):
     X = {vertex}
     dist = {vertex: 0}
     V = list(graph.keys())
-    H = [((float('inf'), 'inf'), 'inf')]
+    # H = [((float('inf'), 'inf'), 'inf')]
 
     VminusX = set(V)-set(X)
     H = []
