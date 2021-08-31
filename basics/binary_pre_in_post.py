@@ -44,64 +44,47 @@ def post_recursive(root, visited=None):
 
 
 def pre_iterative(root):
-    stack = [root]
-    visited = set([root])
-    visited_in_order = [root.val]
-    while stack:
-        node = stack[-1]
-        if node.left and node.left not in visited:
-            stack.append(node.left)
-            visited.add(node.left)
-            visited_in_order.append(node.left.val)
-        elif node.right and node.right not in visited:
-            stack.append(node.right)
-            visited.add(node.right)
-            visited_in_order.append(node.right.val)
+    stack = []
+    pre_ord = []
+    while True:
+        if root:
+            pre_ord.append(root.val)
+            stack.append(root)
+            root = root.left
+        elif stack:
+            root = stack.pop()
+            root = root.right
         else:
-            stack.pop()
-    return visited_in_order
+            return pre_ord
 
 
 def in_iterative(root):
-    """not working"""
-    stack = [root]
-    visited = set([root])
-    visited_in_order = []
-    left_node_visited = True
-    while stack:
-        node = stack[-1]
-        if node.left and node.left not in visited:
-            stack.append(node.left)
-            visited.add(node.left)
-            left_node_visited = True
-        elif node.right and node.right not in visited:
-            stack.append(node.right)
-            visited.add(node.right)
-            visited_in_order.append(node.right.val)
-            left_node_visited = False
+    stack = []
+    in_ord = []
+    while True:
+        if root:
+            stack.append(root)
+            root = root.left
+        elif stack:
+            root = stack.pop()
+            in_ord.append(root.val)
+            root = root.right
         else:
-            if left_node_visited is True:
-                visited_in_order.append(node.val)
-            stack.pop()
-    return visited_in_order
+            return in_ord
 
 
 def post_iterative(root):
     stack = [root]
-    visited = set([root])
-    visited_in_order = []
+    post_ord = []
     while stack:
-        node = stack[-1]
-        if node.left and node.left not in visited:
-            stack.append(node.left)
-            visited.add(node.left)
-        elif node.right and node.right not in visited:
-            stack.append(node.right)
-            visited.add(node.right)
-        else:
-            visited_in_order.append(node.val)
-            stack.pop()
-    return visited_in_order
+        root = stack.pop()
+        post_ord.append(root.val)
+        if root.left:
+            stack.append(root.left)
+        if root.right:
+            stack.append(root.right)
+    post_ord.reverse()
+    return post_ord
 
 
 if __name__ == "__main__":
