@@ -1,9 +1,11 @@
 from collections import deque
 
 import matplotlib.pyplot as plt
-import networkx as nx
+
+# import networkx as nx
 import numpy as np
-from networkx.drawing.nx_agraph import graphviz_layout
+
+# from networkx.drawing.nx_agraph import graphviz_layout
 
 
 class Node:

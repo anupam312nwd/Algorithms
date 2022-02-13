@@ -1,10 +1,10 @@
 """ Depth First Search: Topological ordering"""
-from collections import deque
+# from collections import deque
 
 
 def dfs(graph, start_vertex):
     val = len(graph)
-    stack = deque([start_vertex])
+    stack = [start_vertex]
     parent = {start_vertex: None}
     top_order = {}
     # for w in graph:
@@ -16,13 +16,12 @@ def dfs_visit(graph, parent, stack, val, top_order):
 
     while stack:
         v = stack[-1]
-        if graph[v] != {}:
-            for w in graph[v]:
-                if w not in parent:
-                    parent[w] = v
-                    stack.append(w)
-                    dfs_visit(graph, parent, stack, val, top_order)
-        if stack == deque([]):
+        for w in graph[v]:
+            if w not in parent:
+                parent[w] = v
+                stack.append(w)
+                dfs_visit(graph, parent, stack, val, top_order)
+        if stack == []:
             break
         # print(stack, top_order)
         u = stack.pop()

@@ -12,7 +12,8 @@ while Q \neq empty:
             add w to Q (at the end)
 """
 
-''' Code working for connected graphs, but has bugs for not connected graphs '''
+""" Code working for connected graphs, but has bugs for not connected graphs """
+
 from collections import deque
 
 
@@ -25,7 +26,7 @@ def BFS(graph, vertex):
     path = {}
     for v in graph:
         path[v] = [v]
-        level[v] = float('inf')
+        level[v] = float("inf")
     level[vertex] = 0
     while Queue:
         v = Queue.popleft()
@@ -38,40 +39,41 @@ def BFS(graph, vertex):
                 Queue.append(w)
     #        i += 1
     return level, parent, path
+
+
 # it's not giving the shortest path, but just any path
 
 
 graph = {
-    'A': ['B', 'C'],
-    'B': ['A', 'D', 'E'],
-    'C': ['A', 'D'],
-    'D': ['B', 'C', 'E'],
-    'E': ['B', 'D']
+    "A": ["B", "C"],
+    "B": ["A", "D", "E"],
+    "C": ["A", "D"],
+    "D": ["B", "C", "E"],
+    "E": ["B", "D"],
 }
 
 # level, parent, path = BFS(graph, 'A')
 # print(level, '\n', parent, '\n', path)
 # print('-----------------------------------------------')
-print(BFS(graph, 'C'))
-print('-----------------------------------------------')
+print(BFS(graph, "C"))
+print("-----------------------------------------------")
 # print(BFS(graph, 'C'))
 # print('-----------------------------------------------')
 # print(BFS(graph, 'D'))
 
 graph2 = {
-    's': ['a', 'b'],
-    'a': ['s', 'c'],
-    'b': ['s', 'c', 'd'],
-    'c': ['a', 'b', 'd', 'e'],
-    'd': ['b', 'c', 'e'],
-    'e': ['c', 'd'],
-    'f': ['g', 'h'],
-    'g': ['f', 'i', 'j'],
-    'h': ['f', 'i'],
-    'i': ['g', 'h', 'j'],
-    'j': ['g', 'i']
-
+    "s": ["a", "b"],
+    "a": ["s", "c"],
+    "b": ["s", "c", "d"],
+    "c": ["a", "b", "d", "e"],
+    "d": ["b", "c", "e"],
+    "e": ["c", "d"],
+    "f": ["g", "h"],
+    "g": ["f", "i", "j"],
+    "h": ["f", "i"],
+    "i": ["g", "h", "j"],
+    "j": ["g", "i"],
 }
 
-level, parent, path = BFS(graph2, 's')
-print(level, '\n', path)
+level, parent, path = BFS(graph2, "s")
+print(level, "\n", path)

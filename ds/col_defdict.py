@@ -3,8 +3,10 @@
 """
 
 
+import sys
 from collections import defaultdict
 
+print(sys.executable)
 # dict1 = dict()
 dict2 = defaultdict(int)
 
