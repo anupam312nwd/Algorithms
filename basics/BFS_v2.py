@@ -43,7 +43,6 @@ def BFS(graph, vertex):
 
 # it's not giving the shortest path, but just any path
 
-
 graph = {
     "A": ["B", "C"],
     "B": ["A", "D", "E"],

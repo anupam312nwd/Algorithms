@@ -1,9 +1,0 @@
-.DS_Store
-.idea
-*.log
-tmp/
-basics/test.py
-.vscode
-Test/
-.pytest_cache
-.gitignore
