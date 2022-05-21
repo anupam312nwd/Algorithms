@@ -5,7 +5,7 @@ def return_minus_one():
     return -1
 
 
-class UnionFind:
+class UnionFindt:
     def __init__(self):
         self.graph = defaultdict(return_minus_one)
 
@@ -19,7 +19,7 @@ class UnionFind:
             return self.find_parent(self.graph[u])
 
 
-uf = UnionFind()
+uf = UnionFindt()
 uf.add_edge(2, 3)
 uf.add_edge(3, 4)
 uf.add_edge(5, 4)

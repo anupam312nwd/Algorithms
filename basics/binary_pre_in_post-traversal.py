@@ -15,37 +15,37 @@ class Node:
         self.right = right
 
 
-def pre_recursive(root, visited=None):
+def pre_order_recursive(root, visited=None):
     if visited is None:
         visited = []
     if root:
         visited.append(root.val)
-        pre_recursive(root.left, visited)
-        pre_recursive(root.right, visited)
+        pre_order_recursive(root.left, visited)
+        pre_order_recursive(root.right, visited)
     return visited
 
 
-def in_recursive(root, visited=None):
+def in_order_recursive(root, visited=None):
     if visited is None:
         visited = []
     if root:
-        in_recursive(root.left, visited)
+        in_order_recursive(root.left, visited)
         visited.append(root.val)
-        in_recursive(root.right, visited)
+        in_order_recursive(root.right, visited)
     return visited
 
 
-def post_recursive(root, visited=None):
+def post_order_recursive(root, visited=None):
     if visited is None:
         visited = []
     if root:
-        post_recursive(root.left, visited)
-        post_recursive(root.right, visited)
+        post_order_recursive(root.left, visited)
+        post_order_recursive(root.right, visited)
         visited.append(root.val)
     return visited
 
 
-def pre_iterative(root):
+def pre_order_iterative(root):
     stack = []
     pre_ord = []
     while True:
@@ -60,7 +60,7 @@ def pre_iterative(root):
             return pre_ord
 
 
-def in_iterative(root):
+def in_order_iterative(root):
     stack = []
     in_ord = []
     while True:
@@ -75,7 +75,7 @@ def in_iterative(root):
             return in_ord
 
 
-def post_iterative(root):
+def post_order_iterative(root):
     stack = [root]
     post_ord = []
     while stack:
@@ -102,13 +102,13 @@ if __name__ == "__main__":
 
     root = nodes[1]
     print("iterative" + "-" * 11)
-    print("pre: ", pre_iterative(nodes[1]))
-    print("in:  ", in_iterative(nodes[1]))
-    print("post:", post_iterative(nodes[1]))
+    print("pre: ", pre_order_iterative(nodes[1]))
+    print("in:  ", in_order_iterative(nodes[1]))
+    print("post:", post_order_iterative(nodes[1]))
     print("recursive" + "-" * 11)
-    print("pre: ", pre_recursive(nodes[1]))
-    print("in:  ", in_recursive(nodes[1]))
-    print("post:", post_recursive(nodes[1]))
+    print("pre: ", pre_order_recursive(nodes[1]))
+    print("in:  ", in_order_recursive(nodes[1]))
+    print("post:", post_order_recursive(nodes[1]))
 
     # graph = {1: [2, 5], 2: [3, 4]}
     # G = nx.from_dict_of_lists(graph)
