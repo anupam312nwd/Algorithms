@@ -92,7 +92,7 @@ def post_order_iterative(root):
 if __name__ == "__main__":
 
     nodes = [Node(0)] * 7
-    nodes = [""] * 7
+    nodes = [Node(-1)] * 7
     for i in range(1, 6):
         nodes[i] = Node(i)
     nodes[1].left = nodes[2]

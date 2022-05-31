@@ -9,6 +9,7 @@ def memoize(f):
     return helper
 
 
+@memoize
 def fib(n):
     if n in {0, 1}:
         return n
@@ -16,7 +17,7 @@ def fib(n):
         return fib(n - 1) + fib(n - 2)
 
 
-fib = memoize(fib)
+# fib = memoize(fib)
 
 if __name__ == "__main__":
     print(fib(44))
