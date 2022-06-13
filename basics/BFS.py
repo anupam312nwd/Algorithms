@@ -1,73 +1,64 @@
-#!/usr/bin/env python3;  # -*- coding: utf-8 -*-
-"""
-Created on Wed Jan  1 23:23:47 2020;    @author: anupam
-Pseudo-code for BFS (Graph G, start vertex s)
-mark s explored
-let Q queue dataset (FIFO) initialized w s
-while Q \neq empty:
-    remove the first node of Q, call it v
-    for each edge (v,w):
-        if w unexplored:
-            mark w as explored
-            add w to Q (at the end)
-"""
-
 from collections import deque
 
-
-def BFS(graph, vertex):
-    Queue = deque([vertex])
-#    level = {vertex:0}
-    parent = {vertex: None}
-#    i = 1
-    path = {}
-    for v in graph:
-        path[v] = [v]
-
-    while Queue:
-        v = Queue.popleft()     # if use _.pop(), then act as stack
-        for w in graph[v]:
-            if w not in parent:   # if w not in level
-                # level[w] = i
-                parent[w] = v
-                path[w] = path[v] + path[w]
-                Queue.append(w)
-#        i += 1
-    level = {}
-    for v in graph:
-        level[v] = len(path[v]) - 1
-    return level, parent, path
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
-graph = {
-    'A': ['B', 'C'],
-    'B': ['A', 'D', 'E'],
-    'C': ['A', 'D'],
-    'D': ['B', 'C', 'E'],
-    'E': ['B', 'D']
-}
+def bfs_iterative(graph, root):
+    """using queue data structure"""
+    que = deque([root])
+    visited = [root]
+    while que:
+        popped = que.pop()
+        for nbr in graph[popped]:
+            if nbr not in visited:
+                visited.append(nbr)
+                que.appendleft(nbr)
+    return visited
 
-# level, parent, path = BFS(graph, 'A')
-# print(level, '\n', parent, '\n', path)
-# print('-----------------------------------------------')
-# print(BFS(graph, 'C'))
-# print('-----------------------------------------------')
-# print(BFS(graph, 'D'))
 
-graph2 = {
-    # 's' : ['a', 'b'],
-    # 'a' : ['s', 'c'],
-    # 'b' : ['s', 'c', 'd'],
-    # 'c' : ['a', 'b', 'd', 'e'],
-    # 'd' : ['b', 'c', 'e'],
-    # 'e' : ['c', 'd'],
-    'f': ['g', 'h'],
-    'g': ['f', 'i', 'j'],
-    'h': ['f', 'i'],
-    'i': ['g', 'h', 'j'],
-    'j': ['g', 'i']
+def bfs_recursive(graph, root, visited_in_order=None, visited=None):
+    if visited is None:
+        visited = set([root])
+    if visited_in_order is None:
+        visited_in_order = [root]
+    for nbr in graph[root]:
+        visited_nbr = []
+        if nbr not in visited:
+            visited.add(nbr)
+            visited_nbr.append(nbr)
+        visited_in_order += visited_nbr
+        for nbr in visited_nbr:
+            bfs_recursive(graph, nbr, visited_in_order, visited)
+    return visited_in_order
 
-}
 
-level, parent, path = BFS(graph2, 'f')
-print(level, '\n', path)
+if __name__ == "__main__":
+
+    graph = {
+        "a": ["b", "d", "c"],
+        "b": ["a", "d", "e"],
+        "c": ["a", "i"],
+        "d": ["a", "b", "h"],
+        "e": ["b"],
+        "h": ["d", "i"],
+        "i": ["h", "k"],
+        "k": ["i"],
+    }
+
+    print(bfs_iterative(graph, "a"))
+    print(bfs_recursive(graph, "a"))
+    G = nx.from_dict_of_lists(graph)
+    G = nx.Graph(graph)
+    # nx.draw(
+    #     G,
+    #     node_color="white",
+    #     arrowstyle="-|>",
+    #     edgecolors="black",
+    #     with_labels=True,
+    #     arrows=True,
+    # )
+    # nx.draw_spring(G)
+    nx.draw_networkx(G)
+    # nx.draw(G)
+    plt.savefig("graph.png")

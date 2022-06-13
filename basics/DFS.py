@@ -1,5 +1,10 @@
 """Depth First Search: recursive (without using Stack)."""
 
+import networkx as nx
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 12))
+
 
 def dfs(graph, vertex):
     """Return parents using graph and vertex."""
@@ -42,7 +47,7 @@ def dfs_stack(graph, ver):
 if __name__ == "__main__":
     graph = {"A": ["B", "C"], "B": ["D", "E"], "C": ["D"], "D": [], "E": ["D"]}
 
-    print(dfs(graph, "A"))
+    # print(dfs(graph, "A"))
 
     graph = {
         "a": ["b", "d", "c"],
@@ -55,5 +60,10 @@ if __name__ == "__main__":
         "i": ["h", "k", "c"],
         "k": ["i"],
     }
+
+    # G = nx.DiGraph(graph)
+    # nx.draw_networkx(G)
+    # plt.savefig("nx_graph.png")
+
     dfs_recur(graph, "a")
     # dfs_stack(graph, "a")
