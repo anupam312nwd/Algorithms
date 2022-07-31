@@ -47,32 +47,30 @@ def post_order_recursive(root, visited=None):
 
 def pre_order_iterative(root):
     stack = []
-    pre_ord = []
-    while True:
+    traversal = []
+    while root or stack:
         if root:
-            pre_ord.append(root.val)
             stack.append(root)
             root = root.left
-        elif stack:
-            root = stack.pop()
-            root = root.right
         else:
-            return pre_ord
+            root = stack.pop()
+            traversal.append(root.value)
+            root = root.right
+    return traversal
 
 
 def in_order_iterative(root):
     stack = []
-    in_ord = []
-    while True:
+    traversal = []
+    while root or stack:
         if root:
+            traversal.append(root.value)
             stack.append(root)
             root = root.left
-        elif stack:
-            root = stack.pop()
-            in_ord.append(root.val)
-            root = root.right
         else:
-            return in_ord
+            root = stack.pop()
+            root = root.right
+    return traversal
 
 
 def post_order_iterative(root):

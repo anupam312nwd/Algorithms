@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+import networkx as nx
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 12))
 
 
 def get_in_coming_degree(graph):
@@ -32,7 +36,7 @@ def kahn_topological_sort():
             in_coming_degree.pop(node)  # --------------------------------- O(1)
             topological_order.append(node)  # ----------------------------- O(1)
             remove_node_from_graph(graph, node, in_coming_degree)  # ------ O(nbrs)
-            no_in_degree_set = get_no_in_degree_set(in_coming_degree)  # -- O(V)
+        no_in_degree_set = get_no_in_degree_set(in_coming_degree)  # -- O(V)
     if not no_in_degree_set and graph:
         return "A topological sort does not exist!"
     return topological_order
@@ -65,6 +69,9 @@ def get_graph():
     graph["11"] = ["12"]
     graph["12"] = ["8"]
     graph["13"] = []
+    # G = nx.DiGraph(graph)
+    # nx.draw_networkx(G, edgecolors="k", node_color="w", arrows=True, arrowsize=20)
+    # plt.savefig("topological_sort.png")
     return graph
 
 
