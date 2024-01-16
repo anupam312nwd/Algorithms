@@ -24,7 +24,6 @@ def get_paths_bet_two_points(graph, u, v, visited=None, all_paths=None):
 
 
 if __name__ == "__main__":
-
     graph = {
         "a": ["b", "d", "c"],
         "b": ["a", "d", "e"],
@@ -35,6 +34,6 @@ if __name__ == "__main__":
         "g": ["f", "c"],
     }
 
-    plot_graph_from_dict(graph)
+    plot_graph_from_dict(graph, direction=True)
     paths = get_paths_bet_two_points(graph, "c", "b")
     print(paths)
