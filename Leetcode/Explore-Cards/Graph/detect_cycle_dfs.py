@@ -8,39 +8,25 @@ plt.figure(figsize=(12, 12))
 
 
 def detect_cycle_recur(v, graph):
-    visited = {v: False for v in graph}
-    path = {v: False for v in graph}
+    visited = set()
+    path = set()
 
     def helper(vertex, visited, path):
-        visited[vertex] = True
-        path[vertex] = True
+        visited.add(vertex)
+        path.add(vertex)
         for nbr in graph[vertex]:
-            if not visited[nbr]:
-                if helper(nbr, visited, path) == True:
+            if nbr not in visited:
+                if helper(nbr, visited, path):
                     return True
-            elif path[nbr] == True:
+            elif nbr in path:
                 return True
-        path[vertex] = False
+        path.remove(vertex)
         return False
 
     return helper(v, visited, path)
 
 
-def detect_cycle_stack(v, graph):
-    visited = {v: False for v in graph}
-    stack = [v]
-    path = [v]
-    while stack:
-        v = stack.pop()
-        for nbr in graph[v]:
-            if nbr in path:
-                return True
-            if nbr not in visited:
-                visited[nbr] = True
-
-
 if __name__ == "__main__":
-
     graph_no_cycle = {"a": ["b", "c"], "b": ["e"], "c": ["b", "d"], "d": ["e"], "e": []}
     print(detect_cycle_recur("a", graph_no_cycle))
 

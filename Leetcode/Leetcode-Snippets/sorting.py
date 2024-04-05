@@ -22,3 +22,9 @@ for k in c:
     lst.append(k)
 
 print(lst)
+
+lst_strings = ["hello", "we", "are", "welcome", "sorting"]
+lst_strings.sort(key=len, reverse=True)  # changes the list
+print("lst_strings sorted by length: ", lst_strings)
+lst_strings.sort()
+print("lst_strings sorted by alpha order: ", lst_strings)

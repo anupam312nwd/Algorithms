@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 
-import numpy as np
-import networkx as nx
-import matplotlib.pyplot as plt
 from binarytree import Node
-
-plt.figure(figsize=(12, 12))
 
 
 def pre_order_recur(root, visited=None):
@@ -43,44 +38,48 @@ def post_order_recur(root, visited=None):
 
 def pre_order_iter(root):
     stack = [root]
-    traversal_pre = []
+    result = []
     while stack:
-        vertex = stack.pop()
-        traversal_pre.append(vertex.value)
-        if vertex.right:
-            stack.append(vertex.right)
-        if vertex.left:
-            stack.append(vertex.left)
-    return traversal_pre
+        current = stack.pop()
+        result.append(current.value)
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+    return result
 
 
-# def in_order_iter(root):
-#     stack = [root]
-#     traversal_pre = []
-#     while stack:
-#         vertex = stack[-1]
-#         if vertex.right:
-#             stack.append(vertex.right)
-#         stack.pop()
-#         traversal_pre.append(vertex.value)
-#         if vertex.left:
-#             stack.append(vertex.left)
-#     return traversal_pre
+def in_order_iter(root):
+    result = []
+    stack = []
+    current = root
+
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        result.append(current.val)
+        current = current.right
+
+    return result
 
 
 def post_order_iter(root):
-    stack = [root]
-    traversal_pre = []
-    while True:
-        if root:
-            vertex = stack.pop()
-        elif stack:
-            stack.append(vertex.right)
-        else:
-            return traversal_pre
+    result = []
+    stack = [root] if root else []
+    while stack:
+        current = stack.pop()
+        result.append(current.val)
+        if current.left:
+            stack.append(current.left)
+        if current.right:
+            stack.append(current.right)
+    return result[::-1]
 
 
-def test_traversal(root):
+def traversalCheck():
+    root = create_sample_tree()
     assert ["a", "b", "d", "e", "f", "c"] == pre_order_recur(root)
     assert ["d", "b", "f", "e", "a", "c"] == in_order_recur(root)
     assert ["d", "f", "e", "b", "c", "a"] == post_order_recur(root)
@@ -109,8 +108,8 @@ if __name__ == "__main__":
     print(f"Pre order iter: {pre_order_iter(root)}")
     print("--------------------------------------------------")
     print(f"In order recur: {in_order_recur(root)}")
-    # print(f"In order iter: {in_order_iter(root)}")
+    print(f"In order iter: {in_order_iter(root)}")
     print("--------------------------------------------------")
     print(f"Post order recur: {post_order_recur(root)}")
-    # print(f"Post order iter: {post_order_iter(root)}")
-    # test_traversal(root)
+    print(f"Post order iter: {post_order_iter(root)}")
+    traversalCheck()

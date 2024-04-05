@@ -17,7 +17,6 @@ class Node:
 
 
 def reverse(head) -> Node:
-    # TODO: Write your code here
     previous = None
     while head:
         temp = head.next

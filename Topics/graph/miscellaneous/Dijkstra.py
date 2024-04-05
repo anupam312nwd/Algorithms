@@ -1,7 +1,7 @@
 """
 Dijkstra's shortest path algorithm pseudo-code:
 Initialize:
-    parent [vertices] = -1
+    previous [node] = node
     distances [vertices] = float('inf')
 
 dijkstra(graph, vertex):
@@ -11,43 +11,41 @@ dijkstra(graph, vertex):
 import heapq
 
 
-def dijkstra(graph, vertex0):
-    all_vertices = graph.keys()
-    visited = set()
-    parent = {}
-    distances = {}
-    heap = []
-    not_visited = {vertex0}
-    for ver in all_vertices:
-        distances[ver] = float("inf")
-        if ver != vertex0:
-            not_visited.add(ver)
-            parent[ver] = -1
-            heapq.heappush(heap, (float("inf"), ver))
-        else:
-            parent[vertex0] = -1
-            heapq.heappush(heap, (0, vertex0))
+def find_shortest_path(previous):
+    shortest_paths = {node: [] for node in previous.keys()}
+    for node in previous.keys():
+        current = node
+        while previous[current] is not None:
+            shortest_paths[node].append(previous[current])
+            current = previous[current]
+        shortest_paths[node].reverse()
+        shortest_paths[node].append(node)
+    return shortest_paths
 
-    while not_visited and heap:
-        val, ver = heapq.heappop(heap)
-        if distances[ver] > val:
-            distances[ver] = val
-            visited.add(ver)
-        if ver in not_visited:
-            not_visited.remove(ver)
 
-        for nbr in graph[ver]:
-            temp_dist = distances[ver] + graph[ver][nbr]
-            if nbr in not_visited and distances[nbr] > temp_dist:
-                distances[nbr] = temp_dist
-                parent[nbr] = ver
-                heapq.heappush(heap, (temp_dist, nbr))
+def dijkstra(graph, node):
+    distances = {vertex: float('inf') for vertex in graph.keys()}
+    heap = [(distances[vertex], vertex) for vertex in graph.keys()]
+    heapq.heapify(heap)
 
-    return distances, parent
+    previous = {node: None}
+    distances[node] = 0
+    heapq.heappush(heap, (distances[node], node))
+
+    while heap:
+        current_distance, vertex = heapq.heappop(heap)
+        if current_distance > distances[vertex]:
+            continue
+        for neighbour, weight in graph[vertex].items():
+            distance = current_distance + weight
+            if distance < distances[neighbour]:
+                heapq.heappush(heap, (distance, neighbour))
+                distances[neighbour] = distance
+                previous[neighbour] = vertex
+    return distances, previous
 
 
 if __name__ == "__main__":
-
     graph = {
         "a": {"b": 1, "c": 2, "d": 4},
         "b": {"d": 2, "e": 4},
@@ -59,8 +57,13 @@ if __name__ == "__main__":
         "h": {},
     }
 
-    dist, parent = dijkstra(graph, "a")
-    print(dist, parent)
+    # dist, parent = dijkstra(graph, "a")
+    distances, previous = dijkstra(graph, "a")
+    print(distances)
+    print(previous)
+    print('--------------------------')
+    shortest_paths = find_shortest_path(previous)
+    print(shortest_paths)
 
     """
     Output:
