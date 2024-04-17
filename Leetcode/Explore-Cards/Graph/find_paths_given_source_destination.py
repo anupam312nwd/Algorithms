@@ -2,29 +2,28 @@
 
 ## https://www.geeksforgeeks.org/find-paths-given-source-destination/
 
-import networkx as nx
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(12, 12))
 
 
-def all_paths_between_two_vertices(src, dst, graph):
+def all_paths_between_two_vertices(src, target, graph):
     all_paths = []
+    visited = set()
 
-    def helper(src: str, dst: str, visited: dict, path: list, graph):
-        visited[src] = True
-        path.append(src)
-        if src == dst:
+    def dfs(current, target, path, graph):
+        visited.add(current)
+        path.append(current)
+        if current == target:
             all_paths.append(path.copy())
         else:
-            for nbr in graph[src]:
-                if visited[nbr] == False:
-                    helper(nbr, dst, visited, path, graph)
+            for nbr in graph[current]:
+                if nbr not in visited:
+                    dfs(nbr, target, path, graph)
         path.pop()
-        visited[src] = False
+        visited.remove(current)
 
-    visited = {v: False for v in graph}
-    helper(src, dst, visited, [], graph)
+    dfs(src, target, [], graph)
     return all_paths
 
 

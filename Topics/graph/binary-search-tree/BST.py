@@ -5,7 +5,6 @@ bst
 
 class Node:
     def __init__(self, data=None):
-
         self.data = data
         self.left = None
         self.right = None
@@ -48,8 +47,8 @@ def bst_delete(data, root):
     if data is at a leaf node, has one child, has two child
     - first we need to search the data and corresponding node
     """
-    val, node, parent, child = bst_search(data, root)
-    if not val:
+    Found, node, parent, child = bst_search(data, root)
+    if not Found:
         return None
     else:
         # print("root.data", root.data)
@@ -120,7 +119,6 @@ def bst_max(root):
 
 
 if __name__ == "__main__":
-
     root = bst_insert(12)
     bst_insert(5, root)
     bst_insert(14, root)

@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-# import argparse
-
 
 def binary_search(val, arr, left, right):
     if left > right:

@@ -11,19 +11,20 @@ def detect_cycle_recur(v, graph):
     visited = set()
     path = set()
 
-    def helper(vertex, visited, path):
+    def dfs(vertex, visited, inStack):
+        if vertex in inStack:
+            return True
+        if vertex in visited:
+            return False
         visited.add(vertex)
-        path.add(vertex)
+        inStack.add(vertex)
         for nbr in graph[vertex]:
-            if nbr not in visited:
-                if helper(nbr, visited, path):
-                    return True
-            elif nbr in path:
+            if dfs(nbr, visited, inStack):
                 return True
-        path.remove(vertex)
+        inStack.remove(vertex)
         return False
 
-    return helper(v, visited, path)
+    return dfs(v, visited, path)
 
 
 if __name__ == "__main__":
