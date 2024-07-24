@@ -4,6 +4,7 @@ from binarytree import Node
 
 
 def pre_order_recur(root, visited=None):
+    # Rlr
     if visited is None:
         visited = []
     if root is None:
@@ -15,6 +16,7 @@ def pre_order_recur(root, visited=None):
 
 
 def in_order_recur(root, visited=None):
+    # lRr
     if visited is None:
         visited = []
     if root is None:
@@ -26,6 +28,7 @@ def in_order_recur(root, visited=None):
 
 
 def post_order_recur(root, visited=None):
+    # lrR
     if visited is None:
         visited = []
     if root is None:
@@ -37,6 +40,7 @@ def post_order_recur(root, visited=None):
 
 
 def pre_order_iter(root):
+    # Rlr
     stack = [root]
     result = []
     while stack:
@@ -50,6 +54,7 @@ def pre_order_iter(root):
 
 
 def in_order_iter(root):
+    # lRr
     result = []
     stack = []
     current = root
@@ -59,18 +64,19 @@ def in_order_iter(root):
             stack.append(current)
             current = current.left
         current = stack.pop()
-        result.append(current.val)
+        result.append(current.value)
         current = current.right
 
     return result
 
 
 def post_order_iter(root):
+    # lrR
     result = []
     stack = [root] if root else []
     while stack:
         current = stack.pop()
-        result.append(current.val)
+        result.append(current.value)
         if current.left:
             stack.append(current.left)
         if current.right:

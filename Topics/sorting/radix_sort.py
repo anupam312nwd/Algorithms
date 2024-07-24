@@ -13,8 +13,8 @@ def counting_sort(in_arr, exp):
 
     out_arr = [0] * len(in_arr)
     for i in range(len(in_arr) - 1, -1, -1):  # backward since it keeps already sorted part sorted
-        current = in_arr[i]
-        position_in_arr = count_array[(current // exp) % 10] - 1
+        current = in_arr[i]  # current value
+        position_in_arr = count_array[(current // exp) % 10] - 1  # position in output array
         out_arr[position_in_arr] = current
         count_array[(current // exp) % 10] -= 1
     return out_arr
@@ -23,10 +23,13 @@ def counting_sort(in_arr, exp):
 if __name__ == '__main__':
     arr = [21, 30, 923, 86, 15, 47]
     max_val = max(arr)
+
+    # find max_power_of_ten in array
     max_power_of_ten = 0
     while max_val != 0:
         max_power_of_ten += 1
         max_val = max_val // 10
+
     for i in range(max_power_of_ten):
         arr = counting_sort(arr, exp=10 ** i)
     print('sorted array: ', arr)

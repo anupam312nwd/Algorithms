@@ -50,15 +50,15 @@ if __name__ == "__main__":
     print(bfs_recursive(graph, "a"))
     G = nx.from_dict_of_lists(graph)
     G = nx.Graph(graph)
-    # nx.draw(
-    #     G,
-    #     node_color="white",
-    #     arrowstyle="-|>",
-    #     edgecolors="black",
-    #     with_labels=True,
-    #     arrows=True,
-    # )
+    nx.draw(
+        G,
+        node_color="white",
+        arrowstyle="-|>",
+        edgecolors="black",
+        with_labels=True,
+        arrows=True,
+    )
     # nx.draw_spring(G)
-    nx.draw_networkx(G)
+    # nx.draw_networkx(G)
     # nx.draw(G)
     plt.savefig("graph.png")

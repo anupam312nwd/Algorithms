@@ -4,7 +4,7 @@ def monotonic_next_greater(array):
     stack = []
     result = [-1] * len(array)
     for i in range(len(array)):
-        while stack and array[stack[-1]] < array[i]:
+        while stack and array[stack[-1]] < array[i]: # monotonically decreasing
             result[stack[-1]] = i - stack[-1]
             stack.pop()
         stack.append(i)
@@ -15,7 +15,7 @@ def monotonic_next_smaller(array):
     stack = []
     result = [-1] * len(array)
     for i in range(len(array)):
-        while stack and array[stack[-1]] > array[i]:
+        while stack and array[stack[-1]] > array[i]: # monotonically increasing
             result[stack[-1]] = i - stack[-1]
             stack.pop()
         stack.append(i)

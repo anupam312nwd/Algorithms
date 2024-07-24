@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 # import networkx as nx
 import numpy as np
 
+
 # from networkx.drawing.nx_agraph import graphviz_layout
 
 
@@ -19,7 +20,7 @@ def pre_order_recursive(root, visited=None):
     if visited is None:
         visited = []
     if root:
-        visited.append(root.val)
+        visited.append(root.target)
         pre_order_recursive(root.left, visited)
         pre_order_recursive(root.right, visited)
     return visited
@@ -30,7 +31,7 @@ def in_order_recursive(root, visited=None):
         visited = []
     if root:
         in_order_recursive(root.left, visited)
-        visited.append(root.val)
+        visited.append(root.target)
         in_order_recursive(root.right, visited)
     return visited
 
@@ -41,7 +42,7 @@ def post_order_recursive(root, visited=None):
     if root:
         post_order_recursive(root.left, visited)
         post_order_recursive(root.right, visited)
-        visited.append(root.val)
+        visited.append(root.target)
     return visited
 
 
@@ -78,7 +79,7 @@ def post_order_iterative(root):
     post_ord = []
     while stack:
         root = stack.pop()
-        post_ord.append(root.val)
+        post_ord.append(root.target)
         if root.left:
             stack.append(root.left)
         if root.right:
