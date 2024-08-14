@@ -1,25 +1,19 @@
 #!/usr/bin/env python
 
 
-class Solution:
-    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+def allPathsBetweenSourceTarget(graph, source, target):
+    paths = []
+    visited = set()
 
-        target = len(graph) - 1
-        results = []
+    def dfs(node, target, path):
+        visited.add(node)
+        path.append(node)
+        if node == target:
+            paths.append(path[:])
+        else:
+            for nbr in graph[node]:
+                if nbr not in visited:
+                    dfs(nbr, target, path)
 
-        def backtrack(currNode, path):
-            # if we reach the target, no need to explore further.
-            if currNode == target:
-                results.append(list(path))
-                return
-            # explore the neighbor nodes one after another.
-            for nextNode in graph[currNode]:
-                path.append(nextNode)
-                backtrack(nextNode, path)
-                path.pop()
-
-        # kick of the backtracking, starting from the source node (0).
-        path = deque([0])
-        backtrack(0, path)
-
-        return results
+        visited.remove(node)
+        path.pop()
